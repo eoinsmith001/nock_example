@@ -1,4 +1,5 @@
 var express = require('express');
+var handlers = require('./handlers');
 var router = express.Router();
 
 router.route('/')
@@ -9,18 +10,7 @@ router.route('/')
     });
   });
 
-router.route('/name')
-  .get(function(req,res) {
-    res.status(200).json({
-      success: true,
-      name: "Joe Soap"
-    });
-  })
-  .post(function(req,res) {
-    res.status(201).json({
-      success: true,
-      name: "Postman Pat"
-    });
-  });
+router.route('/name').get(handlers.name_get);
+router.route('/name').post(handlers.name_post);
 
 module.exports = router;
