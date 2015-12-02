@@ -10,18 +10,15 @@ describe('name post handler', function() {
         name: 'Adam Barnes'
       }
     };
-    var res = {
-      status: function(arg) {
-        this._status = arg;
-        return this;
-      },
-      json: function(object) {
-        expect(this._status).to.eql(201);
-        expect(object.name).to.eql('Captain Adam Barnes');
+    var res = {};
+    return handlers.name_post(req, res)
+      .then(function(resolution) {
+        expect(resolution.status).to.eql(201);
+        var object = resolution.result;
         expect(object.success).to.be.true;
+        expect(object.name).to.contain('Captain');
         done();
-      }
-    }
-    handlers.name_post(req, res);
+      })
+      .catch(done);
   });
 });

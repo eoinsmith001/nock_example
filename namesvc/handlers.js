@@ -1,14 +1,30 @@
+var promise = require('Promise');
+
 var name_get = function(req,res) {
   res.status(200).json({
     success: true,
     name: "Joe Soap"
   });
 };
+
+function add_captain(name) {
+  return new Promise(function(resolve,reject) {
+    resolve('Captain '+name);
+  });
+}
+
 var name_post =  function(req,res) {
-  var returned_name = 'Captain '+req.body.name;
-  res.status(201).json({
-    success: true,
-    name: returned_name
+  return new Promise(function(resolve,reject) {
+    add_captain(req.body.name)
+      .then(function(modified_name) {
+        resolve( {
+          status: 201,
+          result : {
+            success: true,
+            name: modified_name
+          }
+        });
+      });
   });
 };
 
