@@ -9,7 +9,7 @@ app.set('name', 'namesvc');
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 app.use(cors());
-app.use(morgan("combined"));
+app.use(morgan('combined'));
 app.use('/api', router);
 app.listen(port, function() {
   console.log(app.get('name')+'listening on port '+port);
