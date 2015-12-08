@@ -1,4 +1,4 @@
-var promise = require('Promise');
+var promise = require('promise');
 
 var name_get = function(req,res) {
   res.status(200).json({
